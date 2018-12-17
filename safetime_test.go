@@ -8,7 +8,7 @@ import (
 
 func TestSafeTimer(tt *testing.T) {
 	deadtime := time.Now().Add(2 * time.Second)
-	t := NewSafeTimer(100 * time.Hour)
+	t := NewTimer(100 * time.Hour)
 	wg := sync.WaitGroup{}
 	wg.Add(8)
 	for i := 0; i < 8; i++ {

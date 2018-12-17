@@ -6,19 +6,19 @@ import (
 )
 
 // SafeTime add thread-safe for time.Timer
-type SafeTimer struct {
+type Timer struct {
 	*time.Timer
 	mu sync.Mutex
 }
 
-func NewSafeTimer(d time.Duration) *SafeTimer {
-	return &SafeTimer{
+func NewTimer(d time.Duration) *Timer {
+	return &Timer{
 		Timer: time.NewTimer(d),
 	}
 }
 
 // Reset is thread-safe now
-func (t *SafeTimer) Reset(d time.Duration) bool {
+func (t *Timer) Reset(d time.Duration) bool {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 	return t.Timer.Reset(d)

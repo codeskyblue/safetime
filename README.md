@@ -28,6 +28,30 @@ func main() {
 
 This code will be panic if you try to run.
 
+With this lib `safetime` it will not panic any more.
+
+```go
+package main
+
+import (
+	time "github.com/codeskyblue/safetime"
+)
+
+func main() {
+	tm := time.NewTimer(1 * time.Millisecond)
+	for i := 0; i < 2; i++ {
+		go func() {
+			for {
+				tm.Reset(1 * time.Millisecond)
+			}
+		}()
+	}
+	for {
+		<-tm.C
+	}
+}
+```
+
 panic in `go 1.11`
 
 ## LICENSE
